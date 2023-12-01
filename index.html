@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>For Luthfiana <3</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                text-align: center;
+                background-color: #f2f2f2;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
+
+            .card {
+                background-color: #fff;
+                padding: 4vw;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                max-width: 100vw;
+                margin: auto;
+                overflow: hidden;
+            }
+
+            .lyric {
+                opacity: 0;
+                font-size: 1.2em;
+                white-space: nowrap;
+                animation: fadeInOut 4s linear infinite;
+            }
+
+            .center {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+            }
+
+            .heart-button {
+                background-color: transparent;
+                border: none;
+                width: 80px;
+                height: 80px;
+                cursor: pointer;
+                position: relative;
+                animation: pulse 2s infinite;
+            }
+
+            .heart-button::before,
+            .heart-button::after {
+                content: '\2665';
+                color: #ff0000;
+                font-size: 200px;
+                position: absolute;
+                top: 50%; /* Adjusted to center vertically */
+                left: 50%;
+                transform: translate(-50%, -50%) scale(1);
+                transform-origin: center;
+            }
+
+            .heart-button::after {
+                transform: translate(-50%, -50%) scale(0);
+                transform-origin: center;
+            }
+
+            @keyframes fadeInOut {
+                0% {
+                    opacity: 0;
+                }
+
+                0.0% {
+                    opacity: 1;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="center" id="centerContainer">
+            <button class="heart-button" onclick="startMusic()"></button>
+        </div>
+
+        <div class="card" id="lyricsContainer" style="display: none;">
+        </div>
+
+        <audio id="audioPlayer" controls style="display: none;">
+            <source src="lagu/lagu.mp3" type="audio/mp3">
+        </audio>
+
+        <script>
+            const audioPlayer = document.getElementById('audioPlayer');
+            const lyricsContainer = document.getElementById('lyricsContainer');
+            const centerContainer = document.getElementById('centerContainer');
+
+            function displayLyrics() {
+                const currentTime = audioPlayer.currentTime;
+                const currentLyric = lyricsData.find(lyric =>
+                    currentTime >= lyric.start && currentTime < lyric.end
+                );
+
+                if (currentLyric) {
+                    lyricsContainer.innerHTML = `<div class="lyric">${currentLyric.text}</div>`;
+                }
+            }
+
+            function startMusic() {
+                centerContainer.style.display = 'none';
+                audioPlayer.style.display = 'block';
+                audioPlayer.play();
+                lyricsContainer.style.display = 'block';
+                audioPlayer.style.display = 'none';
+            }
+
+            audioPlayer.addEventListener('timeupdate', displayLyrics);
+
+            audioPlayer.addEventListener('ended', function () {
+                centerContainer.style.display = 'flex';
+                audioPlayer.style.display = 'none';
+                lyricsContainer.style.display = 'none';
+                lyricsContainer.innerHTML = '';
+            });
+
+            const lyricsData = [
+                { text: "For Luthfiana <3", start: 0.51, end: 1.36 },
+                { text: "nothing's going to change my love for", start: 1.36, end: 3.719 },
+                { text: "you you ought to know by now how much I", start: 3.719, end: 7.520 },
+                { text: "love you one thing you can be sure of", start: 7.520, end: 12.000 },
+                { text: "I'll never ask for more than your love", start: 12.000, end: 15.280 },
+                { text: "nothing's going to change my love for", start: 15.280, end: 17.680 },
+                { text: "you you ought to know by now how much I", start: 17.680, end: 21.519 },
+                { text: "love you the one might change my whole", start: 21.519, end: 24.519 },
+                { text: "life through but nothing's going to", start: 24.519, end: 27.279 },
+                { text: "change my love for nothing's going to", start: 27.279, end: 30.160 },
+                { text: "change my love for you you ought to know", start: 30.160, end: 33.440 },
+                { text: "by now how much I love you one thing you", start: 33.440, end: 37.800 },
+                { text: "can be sure oh I'll never ask for more", start: 37.800, end: 42.039 },
+                { text: "than your love nothing's going to change", start: 42.039, end: 44.640 },
+                { text: "my love for you you ought to know by now", start: 44.640, end: 48.120 },
+                { text: "how much I love you the one I change my", start: 48.120, end: 51.879 },
+                { text: "whole life through but's going to change", start: 51.879, end: 56.160 },
+                { text: "my love for", start: 56.160, end: 58.879 },
+                { text: "you", start: 58.879, end: 61.879 }
+            ];
+        </script>
+    </body>
+</html>
