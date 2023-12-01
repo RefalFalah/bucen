@@ -35,8 +35,10 @@
                 animation: fadeInOut 4s linear infinite;
             }
 
-            .center {
+            .heart-container {
+                position: relative;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 height: 100vh;
@@ -58,15 +60,36 @@
                 color: #ff0000;
                 font-size: 200px;
                 position: absolute;
-                top: 50%; /* Adjusted to center vertically */
+                top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%) scale(1);
                 transform-origin: center;
+                animation: fadeInOut 4s linear infinite;
             }
 
             .heart-button::after {
                 transform: translate(-50%, -50%) scale(0);
                 transform-origin: center;
+            }
+
+            .text {
+                margin-top: 40px;
+                font-weight: bolder;
+                font-size: small;
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                }
+
+                50% {
+                    transform: scale(1.1);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
             }
 
             @keyframes fadeInOut {
@@ -81,8 +104,9 @@
         </style>
     </head>
     <body>
-        <div class="center" id="centerContainer">
+        <div class="heart-container" id="centerContainer">
             <button class="heart-button" onclick="startMusic()"></button>
+            <span class="text">Clik Hati Di Atas</span>
         </div>
 
         <div class="card" id="lyricsContainer" style="display: none;">
